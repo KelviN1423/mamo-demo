@@ -1617,7 +1617,7 @@ function renderCalendar(){
   for(let d=1;d<=getDaysInMonth(curYear,curMonth);d++){
     const cell=document.createElement("div"); cell.className="day-cell";
     const dKey=dateKey(curYear,curMonth,d);
-    const _t=new Date(),_max=new Date(_t.getFullYear(),_t.getMonth()+1,0),_cd=new Date(curYear,curMonth,d); const isPast=_cd<todayMid||_cd>_max;
+    const _t=new Date(),_max=new Date(_t.getFullYear(),_t.getMonth()+3,31),_cd=new Date(curYear,curMonth,d); const isPast=_cd<todayMid;
     const isToday=d===today.getDate()&&curMonth===today.getMonth()&&curYear===today.getFullYear();
     if(isPast) cell.classList.add("past");
     if(isToday) cell.classList.add("today");
@@ -1627,11 +1627,11 @@ function renderCalendar(){
   }
 }
 document.getElementById("prev-mo").addEventListener("click",()=>{
-  const t=new Date(); if(curYear===t.getFullYear()&&curMonth===t.getMonth()) return;
+  const t=new Date(); 
   if(curMonth===0){curMonth=11;curYear--;}else curMonth--; renderCalendar();
 });
 document.getElementById("next-mo").addEventListener("click",()=>{
-  const t=new Date(); if(curYear===t.getFullYear()&&curMonth===t.getMonth()) return;
+  const t=new Date(); 
   if(curMonth===11){curMonth=0;curYear++;}else curMonth++; renderCalendar();
 });
 
@@ -1931,3 +1931,9 @@ document.getElementById("confirm-modal").addEventListener("click",function(e){
 });
 
 // ─── INIT ───────────
+renderCalendar();
+renderSteps();
+goToStep(1);
+</script>
+</body>
+</html>
